@@ -1,0 +1,27 @@
+# .github/workflows/ci.yml
+name: holamundo
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Usar Node.js
+        run: echo "¡Hola Mundo!"
+      
+      - name: instalando
+        run: npm install -g html-validator-cli
+
+      - name: validator HTML   
+        run: html-validator --file=dist/index.html --verbose
+
+      - name: Validar CSS
+        run: npx css-validator --file=dist\assets\index-0bb75f0b.css
