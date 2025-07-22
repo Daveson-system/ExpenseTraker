@@ -1,0 +1,27 @@
+name: ✅ Validación HTML con html-validator-cli
+
+on:
+  push:
+    branches: [main]  # Puedes cambiarlo a tu rama principal
+  pull_request:
+    branches: [main]
+
+jobs:
+  validar-html:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📦 Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: 🔧 Instalar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: 📥 Instalar html-validator-cli globalmente
+        run: npm install -g html-validator-cli
+
+      - name: ✅ Ejecutar validación HTML
+        run: |
+          html-validator-cli --file "**/*.html" --format text
