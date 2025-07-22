@@ -24,4 +24,4 @@ jobs:
         run: html-validator --file=dist/index.html --verbose
 
       - name: Validar CSS
-        run: npx css-validator --file=dist\assets\index-0bb75f0b.css
+        run: npx css-validator --file=dist/assets/index-0bb75f0b.css
