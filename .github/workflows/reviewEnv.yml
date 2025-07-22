@@ -1,0 +1,40 @@
+name: 🚨 Alerta por .env detectado
+
+on:
+  push:
+    branches: [main]  # o cualquier rama que desees vigilar
+
+jobs:
+  detectar-env:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Revisar cambios
+        uses: actions/checkout@v3
+
+      - name: Buscar archivo .env en los commits
+        run: |
+          git fetch origin main
+          ARCHIVOS=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+          if echo "$ARCHIVOS" | grep -q '\.env'; then
+            echo "::error::Se detectó un archivo .env en el commit"
+            echo "ALERTA=true" >> $GITHUB_ENV
+          else
+            echo "No se detectó archivo .env"
+          fi
+
+      - name: Enviar correo si se detectó .env
+        if: env.ALERTA == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USUARIO }}
+          password: ${{ secrets.EMAIL_CLAVE }}
+          subject: "🚨 ALERTA: Se subió .env al repositorio"
+          to: tu_correo@dominio.com
+          from: GitHub Alert
+          body: |
+            Se detectó que el archivo .env fue subido al repositorio.
+            Verifica y elimina este archivo inmediatamente si contiene credenciales sensibles.
+            Commit: ${{ github.sha }}
