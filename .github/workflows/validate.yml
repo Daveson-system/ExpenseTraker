@@ -21,7 +21,7 @@ jobs:
         run: npm install -g html-validator-cli
 
       - name: validator HTML   
-        run: html-validator --file=dist/index.html --verbose
+        run: html-validator --file=REACTAPP-CICD/index.html --verbose
 
       - name: Validar CSS
-        run: npx css-validator --file=dist/assets/index-0bb75f0b.css
+        run: npx css-validator --file=REACTAPP-CICD/index.css --verbose
