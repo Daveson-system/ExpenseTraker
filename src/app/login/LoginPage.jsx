@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   })
+
+  useEffect(()=>{
+    console.log("only-one")
+  },[])
 
   const handleChange = (e) => {
     setFormData({
