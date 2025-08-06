@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 
 export default function LoginPage() {
+
+  const {register, onSubmit, formState:{errors} } = useForm();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
