@@ -16,7 +16,7 @@
     "react-hook-form": "^7.62.0",
     "react-icons": "^4.8.0",
     "react-router": "^7.7.1",
-    "victory": "^36.6.10"
+    "victory": "^36.9.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.6",
